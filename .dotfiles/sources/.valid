@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Valid's source aliases ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+alias up-cms-docker="cd ~/sheila/valid/jornadas-cms/docker && docker compose up"
+alias up-cms-strapi="cd ~/sheila/valid/jornadas-cms && yarn develop"
+alias up-cms-search="cd ~/sheila/valid/jornadas-search-api && ./gradlew bootRun"
+alias up-cms-docker-reset="cd ~/sheila/valid/jornadas-cms/docker && docker compose down && docker system prune -af && docker volume prune --all --force"
+
+up-cms() {
+  tmux new-session -d -s mysession
+  tmux send-keys -t mysession "up-cms-docker" Enter
+  tmux split-window -h -t mysession
+  tmux send-keys -t mysession "up-cms-strapi" Enter
+  tmux split-window -h -t mysession
+  tmux send-keys -t mysession "up-cms-search" Enter
+  tmux attach -t mysession
+}

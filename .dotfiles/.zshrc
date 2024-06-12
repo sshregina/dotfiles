@@ -92,11 +92,23 @@ done
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
+# add nvm environments
+eval "$(fnm env --use-on-cd --log-level quiet)"
+alias nvm="fnm"
 
 # To use the yarn's installed global packages, the install location has to be added to the PATH environment variable of your shell.
 # @see <https://classic.yarnpkg.com/en/docs/cli/global/>
 export PATH="$(yarn global bin):$PATH"
 
-# add nvm environments
-eval "$(fnm env --use-on-cd --log-level quiet)"
-alias nvm="fnm"
+# pnpm
+export PNPM_HOME="/Users/sheilasilva/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+export PATH="$PATH:/Users/sheilasilva/flutter/bin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
